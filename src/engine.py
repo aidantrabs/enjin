@@ -1,12 +1,9 @@
-import argparse
-import enum
 import joblib
 import matplotlib.pyplot as plt
 import nltk
 import nltk.corpus
 import nltk.stem
 import nltk.tokenize
-import numpy
 import pandas
 import seaborn as sns
 import sklearn
@@ -16,24 +13,40 @@ import sklearn.neighbors
 import sklearn.svm
 import sklearn.tree
 
-from InquirerPy.utils import color_print, patched_print
+from InquirerPy.utils import patched_print
 from sklearn.feature_extraction.text import CountVectorizer
-from sklearn.model_selection import KFold, cross_val_score
-from typing import Union
-from utils import process_text
+from utils import err, process_text, success
 
 CONFUSION_MATRIX_FILE_NAME = "confusion_matrix.png"
 VECTORIZER_OUTPUT_FILE_NAME = "vectorizer.joblib"
 CLASSIFIER_OUTPUT_FILE_NAME = "classifier.joblib"
 
 def collect():
-    patched_print("collect")
+    try:
+        patched_print("collect")
+
+    except Exception:
+        err("Something went wrong while collecting documents!")
+
+    return
 
 def inverted_index():
-    patched_print("inverted_index")
+    try:
+        patched_print("inverted_index")
+
+    except FileNotFoundError:
+        err("You need to collect documents first!")
+
+    return
 
 def search(query: str):
-    patched_print("search")
+    try:
+        patched_print("search")
+
+    except FileNotFoundError:
+        err("You need to collect documents first!")
+
+    return
 
 def train():
     def init_classifier(dataset_file_name: str):
@@ -127,7 +140,7 @@ def train():
         plt.savefig(CONFUSION_MATRIX_FILE_NAME)
         return
 
-    def serialise_classifier(classifier):
+    def serialise_model(classifier, vectorizer):
         """
         Description:
             Save and dump the vectorizer and classifier to the disk.
@@ -138,16 +151,30 @@ def train():
         with open(CLASSIFIER_OUTPUT_FILE_NAME, "wb") as file:
             joblib.dump(classifier, file)
 
+        with open(VECTORIZER_OUTPUT_FILE_NAME, "wb") as file:
+            joblib.dump(vectorizer, file)
+
         return
 
-    vectorizer, classifier, X, Y = init_classifier("something")
-    y_pred = classifier.predict(X)
+    try:
+        vectorizer, classifier, X, Y = init_classifier("SOMETHING")
+        y_pred = classifier.predict(X)
 
-    performance = calculate_performance_metrics(Y, y_pred)
-    print_metrics("something", *performance)
-    save_confusion_matrix(Y, y_pred)
-    serialise_classifier(classifier)
+        performance = calculate_performance_metrics(Y, y_pred)
+        print_metrics("SOMETHING", *performance)
+        save_confusion_matrix(Y, y_pred)
+        serialise_model(classifier, vectorizer)
+
+    except FileNotFoundError:
+        err("No data found!")
+
     return
 
 def predict_link(link: str):
-    patched_print("predicted_link")
+    try:
+        patched_print("predicted_link")
+
+    except Exception:
+        err("Something went wrong while predicting the link!")
+
+    return

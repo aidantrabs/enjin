@@ -1,14 +1,7 @@
-import argparse
-import enum
-import joblib
-import matplotlib.pyplot as plt
 import nltk
 import nltk.corpus
 import nltk.stem
 import nltk.tokenize
-import numpy
-import pandas
-import seaborn as sns
 import sklearn
 import sklearn.metrics
 import sklearn.naive_bayes
@@ -16,11 +9,12 @@ import sklearn.neighbors
 import sklearn.svm
 import sklearn.tree
 
-from InquirerPy.utils import color_print, patched_print
-from sklearn.feature_extraction.text import CountVectorizer
-from sklearn.model_selection import KFold, cross_val_score
+from InquirerPy import inquirer
+from InquirerPy.utils import patched_print
+from engine import collect, inverted_index, search, train, predict_link
 from story import story_text
-from typing import Union
+from utils import err, success, is_valid_url
+
 
 def main():
     while (True):
@@ -52,8 +46,8 @@ def main():
 
         elif option == "Predict a link":
             link = inquirer.text(message="Enter a link:").execute()
-            if (not (link.startswith("http://") or link.startswith("https://") or link.startswith("www."))):
-                color_print([("red", "Invalid link")])
+            if (not is_valid_url(link)):
+                err("Invalid link provided!")
 
             else:
                 predict_link(link)
@@ -71,15 +65,11 @@ def main():
     return
 
 
-def validate_url(link: str):
-    return link.startswith("http://") or link.startswith("https://") or link.startswith("www.")
-
-
 def story():
-    with open("story.txt", "w") as f:
-        f.write(story_text)
+    with open("story.txt", "w") as file:
+        file.write(story_text)
 
-    color_print([("green", "Your story is saved in story.txt!")])
+    success("Your story is saved in story.txt!")
     return
 
 
