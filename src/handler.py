@@ -2,6 +2,7 @@ from InquirerPy.utils import patched_print
 from train import init_classifier, calculate_performance_metrics, print_metrics, save_confusion_matrix, serialise_model
 from collect_docs import collect_docs
 from index import create_inverted_index
+from search_query import search_query
 from utils import err
 
 SOURCES = "data/input/sources.txt"
@@ -55,7 +56,7 @@ def search(query: str):
         None
     """
     try:
-        patched_print("search")
+        search_query(query)
 
     except FileNotFoundError:
         err("You need to collect documents first!")
