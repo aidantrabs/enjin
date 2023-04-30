@@ -9,13 +9,7 @@ from utils import hash_url
 
 from nltk.corpus import stopwords
 
-# nltk.download('stopwords')
-
-TOPICS = [
-     "Technology",
-     "Psychology",
-     "Entertainment",
-]
+nltk.download('stopwords')
 
 def collect_docs(sources: str):
      """
