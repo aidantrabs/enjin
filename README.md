@@ -28,7 +28,9 @@
 
 ## Contributions
  #### **Aidan Traboulay** 200115590
- - 
+ - Implemented `1-Collect New Documents`, `3-Search for a query`
+ - Implemented `def hash_url(url: str)`, `def is_valid_url(url, base_url)`, `def load_inverted_index(file_path)`, `def load_mapping(file_path)`, in the `utils.py` file
+ - Refactored the codebase, added documentation
 
 ####  **Mobina Tooranisama** 200296720
 -  Created the implementation of option `2-Inverted index`
@@ -41,7 +43,7 @@
 All three programs used quite different modules, but were all written using `Python 3.10`.
 
 ### Collecting New Documents (`collect_docs.py`)
-
+This file parsed a given source file which contained 80+ links to crawl from and through. It had a depth which can be updated, depending on the effectiveness of the search. The `justText` and `bs4` libraries were utilized to parse and extract the content from all the links. Based on the selected topics, a subfolder is created where the contents of each URL is then written to a hashed text file. A log file indicating when each file was crawled is also created with relevant information.
 
 
 ### Creating Inverted Index (`index.py`)
@@ -67,24 +69,11 @@ The program defines several functions to tokenize, create soundex code, and buil
 #### Discussion:
 The program utilizes several useful libraries to perform its task efficiently. `NLTK` provides a range of functions to tokenize and normalize text, which are useful for text processing tasks. The program's use of soundex encoding ensures that similar-sounding words are grouped together, which is a useful feature for information retrieval tasks. The program's use of the `defaultdict` class from the collections library simplifies the process of updating the inverted index by allowing the use of the append method to update the list of appearances for each term. Finally, the program's use of the `glob` library makes it easy to retrieve a list of files in a directory based on a pattern.
 
-### Search Query (`search.py`)
+### Search Query (`search_query.py`)
+This file parses the inverted index data and vectorizes the data via a custom-built tokenizer to allow for better efficency when performing the search. Simalarites are found within the data and cosine similarity is used to perform this. The closest match is then found using the distance of the soundex codes. A classifier is then trained to create a greater accuracry when determining the top three values and the model is stored in local storage.
 
 
-
-### Train ML Classifier (``)
-
-
-
-### Predict Link
-
-
-
-### Story
-
-
-
-### Exit
-
+### Train ML Classifier (`train.py`)
 
 
 #### Usage
@@ -92,12 +81,7 @@ The program utilizes several useful libraries to perform its task efficiently. `
 python searchengine.py
 ```
 
-- Note: The user scrolls through the options using the arrow keys in the terminal
-
-
-
-#### Why was __ chosen?
-        classifier = sklearn.naive_bayes.MultinomialNB()
-        classifier = sklearn.svm.SVC()
-        classifier = sklearn.tree.DecisionTreeClassifier()
-        classifier = sklearn.neighbors.KNeighborsClassifier(n)
+#### Notes:
+- The user scrolls through the options using the arrow keys in the terminal.
+- Initial usage might take a while to propogate due to the amount of data being pulled.
+- Preprocessed files were not included.
