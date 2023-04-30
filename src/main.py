@@ -11,9 +11,10 @@ import sklearn.tree
 
 from InquirerPy import inquirer
 from InquirerPy.utils import patched_print
-from engine import collect, inverted_index, search, train, predict_link
+from engine import collect, search, train, predict_link
 from story import story_text
 from utils import err, success, is_valid_url
+from index import inverted_index
 
 
 def main():
