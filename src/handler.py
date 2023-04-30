@@ -6,6 +6,16 @@ from utils import err
 SOURCES = "data/input/sources.txt"
 
 def collect():
+    """
+    Description:
+        Document collection handler
+
+    Parameters:
+        None
+
+    Returns:
+        None
+    """
     try:
         collect_docs(SOURCES)
     except Exception:
@@ -14,6 +24,16 @@ def collect():
     return
 
 def inverted_index():
+    """
+    Description:
+        Inverted index handler
+
+    Parameters:
+        None
+
+    Returns:
+        None
+    """
     try:
         patched_print("inverted_index")
 
@@ -23,6 +43,16 @@ def inverted_index():
     return
 
 def search(query: str):
+    """
+    Description:
+        Search handler
+
+    Parameters:
+        query (str): The query to search for.
+
+    Returns:
+        None
+    """
     try:
         patched_print("search")
 
@@ -32,6 +62,16 @@ def search(query: str):
     return
 
 def train():
+    """
+    Description:
+        Training handler
+
+    Parameters:
+        None
+
+    Returns:    
+        None
+    """
     try:
         vectorizer, classifier, X, Y = init_classifier("SOMETHING")
         y_pred = classifier.predict(X)
@@ -47,6 +87,16 @@ def train():
     return
 
 def predict_link(link: str):
+    """
+    Description:
+        Link prediction handler
+
+    Parameters:
+        link (str): The link to predict.
+
+    Returns:
+        None
+    """
     try:
         patched_print("predicted_link")
 
