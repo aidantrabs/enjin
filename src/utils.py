@@ -22,7 +22,18 @@ def hash_url(url: str):
     return hashlib.sha256(url.encode()).hexdigest()    
 
 def is_valid_url(url, base_url):
+    """
+    Description:
+        Check if the given URL is valid.
+
+    Parameters:
+        url (str): The URL to check.
+
+    Returns:
+        bool: True if the URL is valid, False otherwise.
+    """
     parsed = urlparse(url)
+    
     return bool(parsed.netloc) and bool(parsed.scheme) and base_url in url
 
 def process_text(text: str):
