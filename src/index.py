@@ -75,8 +75,7 @@ def create_inverted_index():
         file.write("|-" + "-"*15 + "-|-" + "-"*8 + "-|-" + "-"*50 + "-|\n")
         for term, appearances in inverted_index.items():
             soundex = get_soundex_code(term)
-            appearances_str = ', '.join([f'({doc_id}, {freq})' for doc_id, freq in appearances])
-            # Add headers
+            appearances_str = ', '.join([f'(H{doc_id}, H{freq})' for doc_id, freq in appearances])
             file.write("|-" + "-"*15 + "-|-" + "-"*8 + "-|-" + "-"*50 + "-|\n")
 
             # Update output_str line with fixed-width formatting
