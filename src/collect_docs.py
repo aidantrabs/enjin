@@ -7,6 +7,7 @@ from bs4 import BeautifulSoup
 from datetime import datetime as dt
 from utils import hash_url
 
+import nltk
 from nltk.corpus import stopwords
 
 nltk.download('stopwords')
