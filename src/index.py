@@ -56,7 +56,7 @@ def create_inverted_index():
         files = glob.glob(f"data/{topic}/*.txt")
         for file_path in files:
             file_hash = file_path.split("/")[-1].split(".")[0]
-            with open(file_path, "r", encoding="utf-8") as file:
+            with open(file_path, "r", encoding="utf-8", errors='replace') as file:
                 content = file.read()
                 tokens = tokenize_text(content)
                 term_freq = dd(int)
@@ -68,13 +68,21 @@ def create_inverted_index():
 
             mapping[file_hash] = doc_id
             doc_id += 1
-    with open("invertedindex.txt", "w", encoding="utf-8") as file:
+            
+    with open("data/output/invertedindex.txt", "w", encoding="utf-8") as file:
+        header = "| {0:<15} | {1:<8} | {2:<50} |\n".format("Term", "Soundex", "Appearances (DocHash, Frequency)")
+        file.write(header)
+        file.write("|-" + "-"*15 + "-|-" + "-"*8 + "-|-" + "-"*50 + "-|\n")
         for term, appearances in inverted_index.items():
             soundex = get_soundex_code(term)
             appearances_str = ', '.join([f'({doc_id}, {freq})' for doc_id, freq in appearances])
-            output_str = f"| {term} | {soundex} | {appearances_str} |\n"
+            # Add headers
+            file.write("|-" + "-"*15 + "-|-" + "-"*8 + "-|-" + "-"*50 + "-|\n")
+
+            # Update output_str line with fixed-width formatting
+            output_str = "| {0:<15} | {1:<8} | {2:<50} |\n".format(term, soundex, appearances_str)            
             file.write(output_str)
-    with open("mapping.txt", "w") as file:
+    with open("data/output/mapping.txt", "w") as file:
         for file_hash, doc_id in mapping.items():
             file.write(f"{file_hash} {doc_id}\n")    
             print()
