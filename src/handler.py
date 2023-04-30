@@ -1,6 +1,7 @@
 from InquirerPy.utils import patched_print
 from train import init_classifier, calculate_performance_metrics, print_metrics, save_confusion_matrix, serialise_model
 from collect_docs import collect_docs
+from index import create_inverted_index
 from utils import err
 
 SOURCES = "data/input/sources.txt"
@@ -35,7 +36,7 @@ def inverted_index():
         None
     """
     try:
-        patched_print("inverted_index")
+        create_inverted_index()
 
     except FileNotFoundError:
         err("You need to collect documents first!")
