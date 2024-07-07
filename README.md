@@ -1,46 +1,13 @@
-# CP-423-Project
+# Search Engine
 
 <div align="center">
 
-
-
-# Final Project Report
-
-
-
 #### Friday 28th April 2023
-
-
 
 </div>
 
 
-
-## Group Members
-
-*  **Aidan Traboulay** 200115590 - trab5590@mylaurier.ca
-
-*  **Mobina Tooranisama** 200296720 - toor6720@mylaurier.ca
-
-*  **Nausher Rao** 190906250 - raox6250@mylaurier.ca
-
-
-
-## Contributions
- #### **Aidan Traboulay** 200115590
- - Implemented `1-Collect New Documents`, `3-Search for a query`
- - Implemented `def hash_url(url: str)`, `def is_valid_url(url, base_url)`, `def load_inverted_index(file_path)`, `def load_mapping(file_path)`, in the `utils.py` file
- - Refactored the codebase, added documentation
-
-####  **Mobina Tooranisama** 200296720
--  Created the implementation of option `2-Inverted index`
-
-####  **Nausher Rao** 190906250
-- 
-
-
-## Explanations
-All three programs used quite different modules, but were all written using `Python 3.10`.
+> All three programs used quite different modules, but were all written using `Python 3.10`.
 
 ### Collecting New Documents (`collect_docs.py`)
 This file parsed a given source file which contained 80+ links to crawl from and through. It had a depth which can be updated, depending on the effectiveness of the search. The `justText` and `bs4` libraries were utilized to parse and extract the content from all the links. Based on the selected topics, a subfolder is created where the contents of each URL is then written to a hashed text file. A log file indicating when each file was crawled is also created with relevant information.
